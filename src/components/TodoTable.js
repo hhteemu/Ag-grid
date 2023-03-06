@@ -6,10 +6,14 @@ import 'ag-grid-community/styles/ag-theme-material.css'
 function TodoTable(props) {
 
     const columns = [
-        { field: "date" , sortable: true , filter: true },
-        { field: "desc" , sortable: true , filter: true },
-        { field: "prio" , sortable: true , filter: true,
+        { field: "date" , sortable: true , filter: true , floatingFilter: true},
+        { field: "desc" , sortable: true , filter: true , floatingFilter: true},
+        { field: "prio" , sortable: true , filter: true , floatingFilter: true,
         cellStyle: params => params.value === "High" ? {color: 'red'} : {color: 'black'} }]
+
+    const gridOptions = {
+        animateRows: true
+    }
 
     return (
     <div className="ag-theme-material"
@@ -19,7 +23,8 @@ function TodoTable(props) {
     onGridReady={params => props.gridRef.current = params.api}
     rowSelection="single"
     columnDefs={columns}
-    rowData={props.todos}>
+    rowData={props.todos}
+    gridOptions={gridOptions}>
     </AgGridReact>
     </div>
     )}
